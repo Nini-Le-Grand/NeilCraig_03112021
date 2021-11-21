@@ -5,7 +5,7 @@
       <Profile :userId="userId" />
     </div>
     <div class="activity">
-      {{ userId }}
+      <Activity :userId_props="userId" />
     </div>
     <div class="relations">
       <Relations :userId="userId" />
@@ -18,10 +18,11 @@
 <script>
 import Profile from "../components/pages/Profile.vue";
 import Relations from "../components/pages/Relations.vue";
+import Activity from "../components/cards/Activity.vue";
 
 export default {
   name: "Dashboard",
-  components: { Profile, Relations },
+  components: { Profile, Relations, Activity },
   props: {
       userIdn: {
           type: Number
@@ -43,14 +44,12 @@ export default {
   padding: 20px 60px;
   min-height: 100vh;
 }
-.profile {
-  width: 20%;
-}
+
 .activity {
-  flex: 1;
-  margin: 0px 20px;
+  margin: 0 30px;
+  flex: 5;
 }
 .relations {
-  width: 30%;
+  flex:3;
 }
 </style>

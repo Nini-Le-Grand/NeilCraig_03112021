@@ -13,7 +13,7 @@ router.put("/updateProfile", auth, userMulter, userCtrl.updateProfile);
 router.put("/updatePassword", auth, userCtrl.updatePassword);
 
 router.get("/", auth, userCtrl.getProfiles);
-router.get("/:profile", auth, userCtrl.getProfile);
+router.get("/:userId", auth, userCtrl.getProfile);
 
 router.delete("/delete/:imageUrl", auth, userCtrl.delete);
 

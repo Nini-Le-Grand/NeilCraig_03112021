@@ -29,6 +29,16 @@ exports.getPost = (req, res) => {
   })
 }
 
+exports.getUser = (req, res) => {
+  Comment.getForUser(req.params.userId)
+  .then(data => {
+    res.status(200).json(data)
+  })
+  .catch(err => {
+    res.status(500).json(err)
+  })
+}
+
 exports.delete = (req, res) => {
   Comment.delete(req.params.id)
   .then(data => {

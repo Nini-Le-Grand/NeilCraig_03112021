@@ -80,6 +80,16 @@ exports.getPosts = (req, res) => {
     });
 };
 
+exports.getPost = (req, res) => {
+  Post.getPost(req.params.postId)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+};
+
 exports.getUserPosts = (req, res) => {
   Post.getFromUser(req.params.userId)
     .then((data) => {

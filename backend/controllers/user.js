@@ -117,7 +117,7 @@ exports.getProfiles = (req, res) => {
 };
 
 exports.getProfile = (req, res) => {
-  User.getProfile(req.params.profile)
+  User.getProfile(req.params.userId)
     .then((data) => {
       res.status(200).json(data);
     })

@@ -49,9 +49,9 @@ Comment.getPost = (postId) => {
   }) 
 };
 
-Comment.getOne = (idComments) => {
+Comment.getForUser = (userId) => {
   return new Promise((success, reject) => {
-      db.query("SELECT * FROM comments WHERE userId = ?;", idComments, (err, res) => {
+      db.query("SELECT * FROM comments WHERE userId = ? ORDER BY updatedAt DESC;", userId, (err, res) => {
           if(err) {
               reject(err);
           }

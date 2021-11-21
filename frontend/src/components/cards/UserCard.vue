@@ -5,10 +5,8 @@
         <img v-if="hasImage()" class="picture-img" :src="renderImg()" />
         <i v-else class="far fa-image"></i>
       </div>
-      <router-link :to="'/users/'+user.id">
-      <div class="name">
-      {{ user.firstName }} {{ user.lastName }}
-      </div>
+      <router-link :to="'/users/' + user.id">
+        <div class="name">{{ user.firstName }} {{ user.lastName }}</div>
       </router-link>
       <div class="email">
         {{ user.email }}
@@ -21,21 +19,21 @@
       </div>
     </div>
 
-    <Followbtn :partnerId="user.id"/>
+    <Followbtn :partnerId="user.id" />
   </div>
 </template>
 
 <script>
-import Followbtn from "../buttons/Followbtn.vue"
+import Followbtn from "../buttons/Followbtn.vue";
 
 export default {
   name: "UserCard",
   components: {
-      Followbtn
+    Followbtn,
   },
   props: {
     user: {
-      type: Object
+      type: Object,
     },
   },
   methods: {
@@ -55,8 +53,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .description {
   font-style: italic;
   font-size: 18px;

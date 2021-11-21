@@ -1,19 +1,18 @@
 <template>
-<div>
-  <Navbar class="navbar"/>
-  <div class="container">
-    <div class="forms">
-      <div class="authForm">
-        <AuthForm />
-        <DeleteUserCard class="deleteAccount" />
-      </div>
-      <div class="profileForm">
-        <ProfileForm />
+  <div>
+    <Navbar class="navbar" />
+    <div class="container">
+      <div class="forms">
+        <div class="authForm">
+          <AuthForm />
+          <DeleteUserCard class="deleteAccount" />
+        </div>
+        <div class="profileForm">
+          <ProfileForm />
+        </div>
       </div>
     </div>
   </div>
-</div>
-  
 </template>
 
 <script>

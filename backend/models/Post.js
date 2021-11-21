@@ -47,10 +47,23 @@ Post.get = () => {
   });
 };
 
+Post.getPost = (id) => {
+  return new Promise((success, reject) => {
+    db.query("SELECT * FROM posts WHERE id = ?;", id, (err, res) => {
+      if (err) {
+        reject(err);
+      } else {
+        success(res);
+      }
+    });
+  });
+};
+
 Post.getFromUser = (userId) => {
   return new Promise((success, reject) => {
     db.query(
-      `SELECT * FROM posts WHERE userId = ${userId} ORDER BY updatedAt DESC;`,
+      `SELECT * FROM posts WHERE userId = ? ORDER BY updatedAt DESC;`,
+      userId,
       (err, res) => {
         if (err) {
           reject(err);
