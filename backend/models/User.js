@@ -111,6 +111,20 @@ User.getProfile = (id) => {
   });
 };
 
+User.findUsers = (value) => {
+  return new Promise((success, reject) => {
+    db.query(
+      `SELECT * FROM users WHERE firstName LIKE '%${value}%' OR lastName LIKE '%${value}%' ORDER BY lastName;`, (err, res) => {
+        if (err) {
+          reject(err);
+        } else {
+          success(res);
+        }
+      }
+    );
+  });
+}
+
 User.delete = (id) => {
   return new Promise((success, reject) => {
     db.query(`DELETE FROM users WHERE id = ?`, id, (err, res) => {

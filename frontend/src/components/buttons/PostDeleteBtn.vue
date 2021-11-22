@@ -29,7 +29,7 @@ export default {
             http
             .delete(`posts/delete/${URLParam}`)
             .then(() => {
-                this.$router.go()
+                this.$router.push("/")
             })
         }
     }

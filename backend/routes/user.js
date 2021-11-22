@@ -14,6 +14,7 @@ router.put("/updatePassword", auth, userCtrl.updatePassword);
 
 router.get("/", auth, userCtrl.getProfiles);
 router.get("/:userId", auth, userCtrl.getProfile);
+router.get("/find/:value", userCtrl.findUsers);
 
 router.delete("/delete/:imageUrl", auth, userCtrl.delete);
 

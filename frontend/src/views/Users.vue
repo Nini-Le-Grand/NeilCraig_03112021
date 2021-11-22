@@ -1,8 +1,10 @@
 <template>
 <div>
   <Navbar class="navbar"/>
+  <SearchUserForm @usersFound="setRequest"/>
   <div class="container">
-    <div v-for="user in users" :key="user.id">
+    <div v-if="!hasFoundUser"> Aucun utilisateur ne correspond à la recherche ! </div>
+    <div v-else v-for="user in users" :key="user.id">
       <UserCard v-if="!isUser(user.id)" :user="user" class="card" />
     </div>
   </div>
@@ -11,19 +13,22 @@
 </template>
 
 <script>
-import Navbar from "../components/Navbar.vue"
+import Navbar from "../components/Navbar.vue";
 import http from "../http";
 import UserCard from "../components/cards/UserCard.vue";
+import SearchUserForm from "../components/forms/SearchUserForm.vue";
 
 export default {
   name: "Users",
   components: {
     Navbar,
     UserCard,
+    SearchUserForm
   },
   data() {
     return {
       users: "",
+      hasFoundUser: true,
     };
   },
   mounted() {
@@ -41,6 +46,16 @@ export default {
       }
       return false;
     },
+    setRequest(payload) {
+      if(payload.length != 0) {
+        this.users = payload;
+        this.hasFoundUser = true;
+      } else {
+        this.hasFoundUser = false;
+        this.echecMessage = ""
+      }
+      
+    }
   },
 };
 </script>

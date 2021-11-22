@@ -33,7 +33,7 @@ export default {
     },
     logout() {
       localStorage.clear();
-      window.location.reload();
+      this.$router.push("/");
     },
   },
 };
