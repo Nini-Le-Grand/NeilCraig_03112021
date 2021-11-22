@@ -27,6 +27,16 @@ exports.getLikes = (req, res) => {
     });
 };
 
+exports.getUserLikes = (req, res) => {
+LikeComment.getForUser(req.params.userId)
+  .then((data) => {
+    res.status(200).json(data);
+  })
+  .catch((err) => {
+    res.status(404).json(err);
+  });
+};
+
 exports.dislike = (req, res) => {
   LikeComment.delete(req.params.id)
     .then((data) => {

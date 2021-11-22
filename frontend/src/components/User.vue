@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <Dashboard :userIdn="userId" />
+    <Dashboard :userId_props="userId" />
   </div>
 </template>
 
@@ -20,5 +20,14 @@ export default {
       userId: parseInt(this.$route.params.id),
     };
   },
+  watch: {
+    $route (to) {
+      
+      if(to.params.id) {
+        console.log(to.params.id);
+        this.userId = parseInt(to.params.id)
+      }
+    }
+  }
 };
 </script>

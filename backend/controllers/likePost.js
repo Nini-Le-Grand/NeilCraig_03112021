@@ -25,6 +25,16 @@ exports.getLikes = (req, res) => {
     })
 }
 
+exports.getUserLikes = (req, res) => {
+    LikePost.getForUser(req.params.userId)
+    .then(data => {
+        res.status(200).json(data);
+    })
+    .catch(err => {
+        res.status(404).json(err);
+    })
+}
+
 exports.dislike = (req, res) => {
     LikePost.delete(req.params.id)
     .then(data => {

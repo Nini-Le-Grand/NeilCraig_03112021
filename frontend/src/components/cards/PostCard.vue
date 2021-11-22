@@ -27,10 +27,10 @@
 
     <div class="reactions">
       <div class="reactionsView">
-        <PostLikes :postId_props="post.id" class="postlikes"/>
+        <PostLikes :postId_props="post.id" :userId_props="userId" class="postlikes"/>
       </div>
       <div class="reactionsButtons">
-        <PostComment :postId_props="post.id" />
+        <PostComment :postId_props="post.id" :userId_props="userId"/>
       </div>
     </div>
   </div>
@@ -55,13 +55,17 @@ export default {
     PostComment
   },
   props: {
-    postObject: {
+    post_props: {
+      style: Object,
+    },
+    userId_props: {
       style: Object,
     },
   },
   data() {
     return {
-      post: this.postObject,
+      post: this.post_props,
+      userId: this.userId_props
     };
   },
   methods: {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PostCard v-for="post in posts" :key="post.id" :postObject="post" />
+    <PostCard v-for="post in posts" :key="post.id" :post_props="post" :userId_props="userId"/>
   </div>
 </template>
 
@@ -21,30 +21,36 @@ export default {
   data() {
     return {
       userId: this.userId_props,
-      comments: [],
-      postsId: [],
       posts: [],
     };
   },
   mounted() {
     http
-    .get(`/comments/user/${this.userId}`)
-    .then((data) => {
-      this.comments = data.data;
-      for (let comment of this.comments) {
-        if (!this.postsId.includes(comment.postId)) {
-          this.postsId.push(comment.postId);
+      .get(`/comments/user/${this.userId}`)
+      .then((data) => {
+        
+        let comments = data.data;
+        let postsId = []
+        for (let comment of comments) {
+          if (!postsId.includes(comment.postId)) {
+            postsId.push(comment.postId);
+          }
         }
-      }
-      for (let id of this.postsId) {
-        http
-        .get(`/posts/${id}`)
-        .then((data) => {
-          this.posts.push(data.data[0]);
-        });
-      }
-    });
-    
+        return postsId;
+      })
+      .then((postsId) => {
+        console.log(postsId);
+        for (let id of postsId) {
+          http
+          .get(`/posts/${id}`)
+          .then((data) => {
+            this.posts.push(data.data[0]);
+          });
+        }
+      });
+  },
+  beforeUpdate() {
+    this.userId = this.userId_props;
   },
 };
 </script>

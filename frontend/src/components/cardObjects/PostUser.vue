@@ -1,11 +1,15 @@
 <template>
     <div class="userContainer">
-        <div class="userImg">
+        <div v-if="userDeleted" class="userDeleted">Utilisateur inconnu</div>
+        <div v-else>
+            <div class="userImg">
             <img :src="user.imageUrl" class="img">
         </div>
         <div class="userName">
             {{user.lastName}} {{ user.firstName}}
         </div>
+        </div>
+        
     </div>
 </template>
 
@@ -22,14 +26,19 @@ export default {
     data() {
         return {
             id: this.userId,
-            user: {}
+            user: {},
+            userDeleted: false
         }
     },
     mounted() {
         http
         .get(`auth/${this.id}`)
         .then(data => {
-            this.user = data.data[0];
+            if(data.data.length == 0) {
+                this.userDeleted = true;
+            } else {
+                this.user = data.data[0];
+            }
         })
     }
 

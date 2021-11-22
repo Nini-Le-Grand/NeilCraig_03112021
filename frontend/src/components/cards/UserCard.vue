@@ -5,7 +5,7 @@
         <img v-if="hasImage()" class="picture-img" :src="renderImg()" />
         <i v-else class="far fa-image"></i>
       </div>
-      <router-link :to="'/users/' + user.id">
+      <router-link :to="'/user/' + user.id">
         <div class="name">{{ user.firstName }} {{ user.lastName }}</div>
       </router-link>
       <div class="email">

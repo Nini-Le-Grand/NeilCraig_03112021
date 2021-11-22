@@ -4,7 +4,7 @@
     <div v-else>
       <div class="commentBox">
         <div>
-          <div class="comment">
+          <div class="comment" :class="{ border: userLiked}">
             <div class="user">
               <CommentUser :userId_props="comment.userId" />
               <DeleteComment
@@ -61,9 +61,13 @@ export default {
     comment_props: {
       type: Object,
     },
+    userId_props: {
+      type: Number,
+    },
   },
   data() {
     return {
+      userId: this.userId_props,
       comment: this.comment_props,
       deleted: false,
       isAuthor: false,
@@ -72,6 +76,7 @@ export default {
       likedId: 0,
       likesNumber: 0,
       hasFetched: false,
+      userLiked: false
     };
   },
   beforeMount() {
@@ -100,6 +105,9 @@ export default {
             this.liked = true;
             this.likedId = like.id;
           }
+          if(like.userId == this.userId) {
+          this.userLiked = true;
+        }
         }
         this.hasFetched = true;
       });
@@ -167,5 +175,9 @@ export default {
 .infoBox {
   display: flex;
   margin-bottom: 10px;
+}
+
+.border {
+ background-color: rgb(255, 184, 184);
 }
 </style>

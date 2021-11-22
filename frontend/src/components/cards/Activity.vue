@@ -20,7 +20,7 @@
                 <DashComments :userId_props="userId" />
             </div>
             <div v-if="likes">
-                Likes
+                <DashLikes :userId_props="userId" />
             </div>
         </div>
     </div>
@@ -29,12 +29,14 @@
 <script>
 import DashPosts from "../pages/DashPosts.vue";
 import DashComments from "../pages/DashComments.vue";
+import DashLikes from "../pages/DashLikes.vue";
 
 export default {
     name: "Activity",
     components: {
         DashPosts,
-        DashComments
+        DashComments,
+        DashLikes
     },
     props: {
         userId_props: {
@@ -49,6 +51,9 @@ export default {
             likes: false
         }
     },
+     beforeUpdate() {
+    this.userId = this.userId_props;
+     },
     methods: {
         showPosts() {
             this.comments = false;

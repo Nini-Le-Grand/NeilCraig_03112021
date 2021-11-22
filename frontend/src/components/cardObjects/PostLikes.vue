@@ -1,6 +1,6 @@
 <template>
   <div class="likeContainer">
-    <div class="likecount">
+    <div :class="{border: userLiked}">
       <strong>{{ likes }}</strong> ont aimé !
     </div>
     <div v-if="hasFetched" class="likeBtn">
@@ -14,7 +14,7 @@ import LikePostBtn from "../buttons/LikePostBtn.vue";
 import http from "../../http";
 
 export default {
-  name: "PostLike",
+  name: "PostLikes",
   components: {
     LikePostBtn,
   },
@@ -22,15 +22,20 @@ export default {
     postId_props: {
       type: Number,
     },
+    userId_props: {
+      type: Number,
+    },
   },
   data() {
     return {
+      userId: this.userId_props,
       likes: 0,
       postId: this.postId_props,
       liked: false,
       likeId: 0,
       postLike: {},
-      hasFetched: false
+      hasFetched: false,
+      userLiked: false
     };
   },
   mounted() {
@@ -40,6 +45,9 @@ export default {
         if (i.userId == this.$store.state.userId) {
           this.liked = true;
           this.likeId = i.id;
+        }
+        if(i.userId == this.userId) {
+          this.userLiked = true;
         }
         break;
       }
@@ -60,6 +68,12 @@ export default {
 </script>
 
 <style scoped>
+.border {
+  background-color: rgb(255, 184, 184);
+  border-radius: 8px;
+  padding: 5px;
+}
+
 .likeContainer {
   display: flex;
   justify-content: space-between;

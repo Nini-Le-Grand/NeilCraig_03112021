@@ -25,7 +25,7 @@ export default {
           .then((data) => {
             if (data) {
               alert("Utilisateur supprimé !");
-              this.$router.push("Connexion")
+              this.$router.push("/")
             }
           })
           .catch((err) => alert(err.response.data.error));

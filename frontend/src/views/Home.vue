@@ -1,7 +1,7 @@
 <template>
 <div>
   <Navbar class="navbar"/>
-  <Dashboard :userIdn="userId" />
+  <Dashboard :userId_props="userId" />
 </div>
   
 </template>

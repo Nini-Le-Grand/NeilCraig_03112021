@@ -15,7 +15,7 @@
         <CommentForm :postId_props="postId" @commentSent="updateComments"/>
       </div>
       <div v-for="comment of comments" :key="comment.id">
-        <CommentCard :comment_props="comment" @changeCount="reduceCount"/>
+        <CommentCard :comment_props="comment" :userId_props="userId" @changeCount="reduceCount"/>
       </div>
     </div>
   </div>
@@ -35,12 +35,16 @@ export default {
     postId_props: {
       type: Number,
     },
+    userId_props: {
+      type: Number,
+    },
   },
   data() {
     return {
       numberOfComments: 0,
       showCommentBox: false,
       postId: this.postId_props,
+      userId: this.userId_props,
       comments: [],
       newComment: {}
     };

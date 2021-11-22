@@ -60,4 +60,28 @@ Userlink.getOne = (userId, partnerId) => {
     });
   };
 
+  Userlink.deleteUserFromUser = (userId) => {
+    return new Promise((success, reject) => {
+      db.query(`DELETE FROM users_users WHERE userId = ?`, userId, (err, res) => {
+        if (err) {
+          reject(err);
+        } else {
+          success(res);
+        }
+      });
+    });
+  };
+
+  Userlink.deletePartnerFromUser = (partnerId) => {
+    return new Promise((success, reject) => {
+      db.query(`DELETE FROM users_users WHERE partnerId = ?`, partnerId, (err, res) => {
+        if (err) {
+          reject(err);
+        } else {
+          success(res);
+        }
+      });
+    });
+  };
+
   module.exports = Userlink;

@@ -1,9 +1,12 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
-require('dotenv').config();
+require("dotenv").config();
 
 const User = require("../models/User");
+const Userlink = require("../models/Userlink");
+const LikePost = require("../models/LikePost");
+const LikeComment = require("../models/LikeComment");
 
 exports.signin = (req, res) => {
   bcrypt
@@ -76,8 +79,8 @@ exports.updateProfile = (req, res) => {
     position: body.position,
     description: body.description,
     imageUrl: body.imageUrl,
-    updatedAt: new Date()
-  }
+    updatedAt: new Date(),
+  };
 
   if (req.file) {
     setImageUrl = `${req.protocol}://${req.get("host")}/images/users/${
@@ -89,15 +92,13 @@ exports.updateProfile = (req, res) => {
   User.update(params, req.headers.userid)
     .then((data) => {
       if (req.file) {
-        let croppedfile = body.imageUrl.split("3000/")[1]
+        let croppedfile = body.imageUrl.split("3000/")[1];
         fs.unlink(`${croppedfile}`, () => {
-          res
-            .status(201)
-            .json({
-              message: "Profil mis à jour !",
-              body,
-              imageUrl: setImageUrl,
-            });
+          res.status(201).json({
+            message: "Profil mis à jour !",
+            body,
+            imageUrl: setImageUrl,
+          });
         });
       } else {
         res.status(201).json({ message: "Profil mis à jour !", body });
@@ -133,7 +134,7 @@ exports.updatePassword = (req, res) => {
         if (valid) {
           bcrypt.hash(req.body.newPassword, 10).then((hash) => {
             const params = {
-              password: hash
+              password: hash,
             };
             User.update(params, req.headers.userid)
               .then((data) => {
@@ -158,21 +159,60 @@ exports.updatePassword = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  let filename = ""
+  let filename = "";
   if (req.params.imageUrl) {
-    filename = "images/users/" + req.params.imageUrl
+    filename = "images/users/" + req.params.imageUrl;
   }
-  console.log(filename);
+
   User.delete(req.headers.userid)
     .then(() => {
-      if (filename != "") {
-        fs.unlink(`${filename}`, () => {
-          res.status(203).json({ message: "Utilisateur supprimé !" });
-        });
-        
-      } else {
-        res.status(203).json({ message: "Utilisateur supprimé !" });
-      }
+      Userlink.deleteUserFromUser(req.headers.userid)
+        .then(() => {
+          Userlink.deletePartnerFromUser(req.headers.userid)
+            .then(() => {
+              LikePost.deleteFromUser(req.headers.userid)
+                .then(() => {
+                  LikeComment.deleteFromUser(req.headers.userid)
+                    .then(() => {
+                      if (filename != "") {
+                        fs.unlink(`${filename}`, () => {
+                          res
+                            .status(203)
+                            .json({ message: "Utilisateur supprimé !" });
+                        });
+                      } else {
+                        res
+                          .status(203)
+                          .json({ message: "Utilisateur supprimé !" });
+                      }
+                    })
+                    .catch(() =>
+                      res
+                        .status(501)
+                        .json({
+                          error: "Echec de la suppression de l'utilisateur !",
+                        })
+                    );
+                })
+                .catch(() =>
+                  res
+                    .status(501)
+                    .json({
+                      error: "Echec de la suppression de l'utilisateur !",
+                    })
+                );
+            })
+            .catch(() =>
+              res
+                .status(501)
+                .json({ error: "Echec de la suppression de l'utilisateur !" })
+            );
+        })
+        .catch(() =>
+          res
+            .status(501)
+            .json({ error: "Echec de la suppression de l'utilisateur !" })
+        );
     })
     .catch(() =>
       res

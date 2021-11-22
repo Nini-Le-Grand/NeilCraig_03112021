@@ -2,13 +2,13 @@
 <div>
   <div class="containers">
     <div class="profile">
-      <Profile :userId="userId" />
+      <Profile :userId_props="userId" />
     </div>
     <div class="activity">
       <Activity :userId_props="userId" />
     </div>
     <div class="relations">
-      <Relations :userId="userId" />
+      <Relations :userId_props="userId" />
     </div>
   </div>
 </div>
@@ -24,16 +24,19 @@ export default {
   name: "Dashboard",
   components: { Profile, Relations, Activity },
   props: {
-      userIdn: {
+      userId_props: {
           type: Number
       }
   },
 
   data() {
     return {
-      userId: this.userIdn,
+      userId: this.userId_props,
     };
   },
+  beforeUpdate() {
+    this.userId = this.userId_props
+  }
 };
 </script>
 

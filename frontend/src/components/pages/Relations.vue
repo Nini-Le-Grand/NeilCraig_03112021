@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h2>Relations</h2>
-        <RelationCard v-for="follow in follows" :key="follow.id" :partner="follow"/>
+        <RelationCard v-for="partner in partners" :key="partner.id" :partnerId_props="partner.partnerId"/>
     </div>
 </template>
 
@@ -11,7 +11,7 @@ import RelationCard from "../cards/RelationCard.vue";
 export default {
     name: "Relations",
     props: {
-        userId: {
+        userId_props: {
             type: Number
         }
     },
@@ -20,17 +20,28 @@ export default {
     },
     data() {
         return {
-            id: this.userId,
-            follows: ""
+            userId: this.userId_props,
+            partners: {}
         }
     },
     mounted() {
         http
-        .get(`userlink/user/${this.id}`)
+        .get(`userlink/user/${this.userId}`)
         .then(data => {
-            this.follows = data.data
+            this.partners = data.data;
+            this.partners.partnerId = parseInt(data.data.partnerId);
         })
-    }
+    },
+    beforeUpdate() {
+    this.userId = this.userId_props;
+  }, updated() {
+      http
+        .get(`userlink/user/${this.userId}`)
+        .then(data => {
+            this.partners = data.data;
+            this.partners.partnerId = parseInt(data.data.partnerId);
+        })
+  }
 }
 </script>
 

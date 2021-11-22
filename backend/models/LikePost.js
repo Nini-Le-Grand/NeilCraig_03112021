@@ -32,9 +32,45 @@ LikePost.getForPost = (postId) => {
     })
 }
 
+LikePost.getForUser = (userId) => {
+    return new Promise((success, reject) => {
+        db.query("SELECT * FROM posts_likes WHERE userId = ?", userId, (err, res) => {
+            if(err) {
+                reject(err);
+            } else {
+                success(res);
+            }
+        })
+    })
+}
+
 LikePost.delete = (id) => {
     return new Promise((success, reject) => {
         db.query("DELETE FROM posts_likes WHERE id = ?", id, (err, res) => {
+            if(err) {
+                reject(err);
+            } else {
+                success(res);
+            }
+        })
+    })
+}
+
+LikePost.deleteFromPost = (postId) => {
+    return new Promise((success, reject) => {
+        db.query("DELETE FROM posts_likes WHERE postId = ?", postId, (err, res) => {
+            if(err) {
+                reject(err);
+            } else {
+                success(res);
+            }
+        })
+    })
+}
+
+LikePost.deleteFromUser = (userId) => {
+    return new Promise((success, reject) => {
+        db.query("DELETE FROM posts_likes WHERE userId = ?", userId, (err, res) => {
             if(err) {
                 reject(err);
             } else {

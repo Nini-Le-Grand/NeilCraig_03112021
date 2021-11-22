@@ -6,7 +6,7 @@
         <PostForm />
       </div>
       <div class="feedbox">
-        <PostCard v-for="post in posts" :key="post.id" :postObject="post" />
+        <PostCard v-for="post in posts" :key="post.id" :post_props="post" :userId_props="userId"/>
       </div>
     </div>
   </div>
@@ -28,6 +28,7 @@ export default {
 
   data() {
     return {
+      userId: this.$store.state.userId,
       posts: [],
     };
   },

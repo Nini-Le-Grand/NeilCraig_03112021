@@ -33,9 +33,57 @@ LikeComment.getForComment = (commentId) => {
     })
 }
 
+LikeComment.getForUser = (userId) => {
+    return new Promise((success, reject) => {
+        db.query("SELECT * FROM comments_likes WHERE userId = ?", userId, (err, res) => {
+            if(err) {
+                reject(err);
+            } else {
+                success(res);
+            }
+        })
+    })
+}
+
 LikeComment.delete = (id) => {
     return new Promise((success, reject) => {
         db.query("DELETE FROM comments_likes WHERE id = ?", id, (err, res) => {
+            if(err) {
+                reject(err);
+            } else {
+                success(res);
+            }
+        })
+    })
+}
+
+LikeComment.deleteFromComment = (commentId) => {
+    return new Promise((success, reject) => {
+        db.query("DELETE FROM comments_likes WHERE commentId = ?", commentId, (err, res) => {
+            if(err) {
+                reject(err);
+            } else {
+                success(res);
+            }
+        })
+    })
+}
+
+LikeComment.deleteFromPost = (postId) => {
+    return new Promise((success, reject) => {
+        db.query("DELETE FROM comments_likes WHERE postId = ?", postId, (err, res) => {
+            if(err) {
+                reject(err);
+            } else {
+                success(res);
+            }
+        })
+    })
+}
+
+LikeComment.deleteFromUser = (userId) => {
+    return new Promise((success, reject) => {
+        db.query("DELETE FROM comments_likes WHERE userId = ?", userId, (err, res) => {
             if(err) {
                 reject(err);
             } else {

@@ -64,7 +64,8 @@ Comment.getForUser = (userId) => {
 
 Comment.delete = (id) => {
   return new Promise((success, reject) => {
-      db.query(`DELETE FROM comments WHERE id = ?`, id, (err, res) => {
+      db.query(
+          `DELETE FROM comments WHERE id = ?;`, id, (err, res) => {
           if(err) {
               reject(err);
           }
@@ -74,5 +75,19 @@ Comment.delete = (id) => {
       });
   });
 };
+
+Comment.deleteFromPost = (postId) => {
+    return new Promise((success, reject) => {
+        db.query(
+            `DELETE FROM comments WHERE postId = ?;`, postId, (err, res) => {
+            if(err) {
+                reject(err);
+            }
+            else {
+                success(res);
+            }
+        });
+    });
+  };
 
 module.exports = Comment;

@@ -1,4 +1,7 @@
 const Post = require("../models/Post");
+const LikePost = require("../models/LikePost");
+const LikeComment = require("../models/LikeComment");
+const Comment = require("../models/Comment");
 const fs = require("fs");
 
 exports.post = (req, res) => {
@@ -107,19 +110,36 @@ exports.deletePost = (req, res) => {
     postId = req.params.id.split("&")[0];
     filename = "images/posts/" + req.params.id.split("&")[1];
   } else {
-    postId = req.params.id
+    postId = req.params.id;
   }
 
   Post.delete(postId)
-    .then((data) => {
-      if (req.params.id.includes("&")) {
-        fs.unlink(`${filename}`, () => {
-          res.status(200).json(data);
+    .then(() => {
+      LikePost.deleteFromPost(postId)
+        .then(() => {
+          Comment.deleteFromPost(postId)
+            .then(() => {
+              LikeComment.deleteFromPost(postId)
+                .then((data) => {
+                  if (req.params.id.includes("&")) {
+                    fs.unlink(`${filename}`, () => {
+                      res.status(200).json(data);
+                    });
+                  } else {
+                    res.status(200).json(data);
+                  }
+                })
+                .catch((err) => {
+                  res.status(500).json(err);
+                });
+            })
+            .catch((err) => {
+              res.status(500).json(err);
+            });
+        })
+        .catch((err) => {
+          res.status(500).json(err);
         });
-      } else {
-        res.status(200).json(data);
-      }
-      
     })
     .catch((err) => {
       res.status(500).json(err);

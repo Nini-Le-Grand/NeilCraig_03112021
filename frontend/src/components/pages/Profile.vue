@@ -25,19 +25,27 @@ import http from "../../http";
 export default {
   name: "Profile",
   props: {
-    userId: {
+    userId_props: {
       type: Number,
     },
   },
 
   data() {
     return {
-      id: this.userId,
+      userId: this.userId_props,
       userData: "",
     };
   },
   mounted() {
-    http.get(`auth/${this.id}`).then((data) => {
+    http.get(`auth/${this.userId}`).then((data) => {
+      this.userData = data.data[0];
+    })
+  },
+  beforeUpdate() {
+    this.userId = this.userId_props;
+  },
+  updated() {
+    http.get(`auth/${this.userId}`).then((data) => {
       this.userData = data.data[0];
     })
   },
