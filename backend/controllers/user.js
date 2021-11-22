@@ -31,7 +31,9 @@ exports.signin = (req, res) => {
         .then((data) => {
           res.status(201).json(`Utilisateur ${data.insertId} créé !`);
         })
-        .catch((err) => res.status(500).json(err.code));
+        .catch((err) => {
+            res.status(500).json(err);
+        }) 
     });
 };
 

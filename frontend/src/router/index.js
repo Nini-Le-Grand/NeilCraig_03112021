@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Connexion from "../views/Authentification/Connexion.vue";
+import Connexion from "../views/Connexion.vue";
 import Home from "../views/Home.vue";
 import Feed from "../views/Feed.vue";
 import Users from "../views/Users.vue";
