@@ -70,9 +70,8 @@ export default {
   justify-content: space-around;
 }
 .formbox {
-  width: 100%;
-  margin: auto;
-  margin-bottom: 20px;
+  width: 90%;
+  margin: 20px auto;
 }
 
 .feedbox {

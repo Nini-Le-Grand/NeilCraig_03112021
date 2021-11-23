@@ -46,10 +46,36 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+    text-align: center;
+}
 .container {
     padding: 20px;
     border-radius: 15px;
     background-color: white;
     box-shadow: 0px 5px 10px 2px rgb(206, 206, 206);
+}
+
+@media all and (max-width: 900px) {
+    .container {
+    padding: 20px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0px 5px 10px 2px rgb(206, 206, 206);
+    max-height: 400px;
+    overflow: scroll;
+}
+}
+
+
+@media all and (max-width: 550px) {
+    .container {
+    padding: 20px;
+    border-radius: 0px;
+    background-color: white;
+    box-shadow: 0px 5px 10px 2px rgb(206, 206, 206);
+    max-height: 400px;
+    overflow: scroll;
+}
 }
 </style>

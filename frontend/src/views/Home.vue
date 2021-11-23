@@ -25,23 +25,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-.containers {
-  background-color: rgb(173, 225, 255);
-  display: flex;
-  padding: 20px 60px;
-  min-height: 100vh;
-}
-.profile {
-  width: 20%;
-}
-.activity {
-  flex: 1;
-  margin: 0px 20px;
-}
-.relations {
-  width: 30%;
-}
-</style>

@@ -65,6 +65,7 @@ export default {
     };
   },
   mounted() {
+   
     http
       .get("/auth/")
       .then((data) => {

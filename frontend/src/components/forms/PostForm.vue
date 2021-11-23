@@ -228,25 +228,4 @@ button:disabled {
   box-shadow: 0px 0px 0px 0px white;
 }
 
-@media all and (max-width: 900px) {
-  .form-container {
-  margin: 0px 0px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 0px;
-  box-shadow: 0px 5px 10px 2px rgb(190, 190, 190);
-}
-.image {
-  height: 180px;
-  width: 250px;
-  border: 2px solid rgb(180, 180, 180);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 10px;
-  justify-self: center;
-
-}
-}
 </style>

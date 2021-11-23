@@ -5,11 +5,11 @@
         <div>
           <PostUser :userId="post.userId" />
         </div>
-        <div>
+        <div class="top-right">
           <PostDate :postDate="post.updatedAt" />
-          <div v-if="isAuthorized()" class="buttons">
-            <PostUpdateBtn :postToUpdate="post"/>
-            <PostDeleteBtn :postToDelete="post" />
+          <div  class="buttons">
+            <PostUpdateBtn  v-if="isAuthor()" :postToUpdate="post"/>
+            <PostDeleteBtn v-if="isAdmin()" :postToDelete="post" />
           </div>
           
         </div>
@@ -65,12 +65,17 @@ export default {
   data() {
     return {
       post: this.post_props,
-      userId: this.userId_props
+      userId: this.userId_props,
     };
   },
   methods: {
-    isAuthorized() {
+    isAuthor() {
       if(this.post.userId == this.$store.state.userId) {
+        return true;
+      }
+    },
+    isAdmin() {
+      if(this.$store.state.isAdmin || this.post.userId == this.$store.state.userId) {
         return true;
       }
     }
@@ -79,13 +84,18 @@ export default {
 </script>
 
 <style scoped>
+.top-right {
+  display: flex;
+  flex-direction: column;
+}
+
 .postlikes {
   width: 100%;
 }
 
 .buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .reactionsView {
   padding: 10px 0px;
@@ -119,7 +129,7 @@ h2 {
 }
 
 .message {
-  font-size: 22px;
+  font-size: 17px;
   margin-bottom: 10px;
 }
 

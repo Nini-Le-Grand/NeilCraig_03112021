@@ -1,7 +1,7 @@
 <template>
   <router-link
     :to="{ name: 'User', params: { id: partnerId }}"
-    class="container"
+    class="containerrr"
   >
     <div class="picture">
       <img :src="partner.imageUrl" class="picture-img" />
@@ -38,11 +38,18 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  margin: 10px 0px;
+.containerrr {
+  margin: 15px 0px;
+  padding: 5px;
   display: flex;
   align-items: center;
+  box-shadow: 0px 0px 5px 2px rgb(197, 197, 197);
+  border-radius: 5px;
 }
+.containerrr:hover {
+  box-shadow: 0px 0px 8px 3px rgb(197, 197, 197);
+}
+
 .name {
   font-weight: bold;
 }

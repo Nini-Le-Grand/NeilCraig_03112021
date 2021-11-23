@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar class="navbar"/>
     <Dashboard :userId_props="userId" />
   </div>
 </template>

@@ -72,7 +72,7 @@ export default {
           localStorage.setItem("userId", response.data.userId);
           this.initUser(response.data);
           console.log(this.$store.state);
-          this.$router.push("Home");
+          this.$router.push("Feed");
         })
         .catch((error) => {
           this.error = error.response.data.error;

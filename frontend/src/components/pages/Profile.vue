@@ -1,14 +1,15 @@
 <template>
   <div class="container">
+    <h2>Profil</h2>
     <div class="info">
       <div class="picture">
         <img v-if="hasImage()" class="picture-img" :src="renderImg()" />
         <i v-else class="far fa-image"></i>
       </div>
       <div class="name">{{ userData.firstName }} {{ userData.lastName }}</div>
-      <div class="email">
+      <a :href="href" class="email">
         {{ userData.email }}
-      </div>
+      </a>
       <div class="position">
         {{ userData.position }}
       </div>
@@ -34,11 +35,13 @@ export default {
     return {
       userId: this.userId_props,
       userData: "",
+      href: ""
     };
   },
   mounted() {
     http.get(`auth/${this.userId}`).then((data) => {
       this.userData = data.data[0];
+      this.href= `mailto:${this.userData.email}`
     })
   },
   beforeUpdate() {
@@ -66,6 +69,9 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  text-align: center;
+}
 .container {
   padding: 20px;
   background-color: white;
@@ -100,7 +106,6 @@ export default {
   justify-content: space-between;
   padding: 20px;
   background-color: white;
-  width: 200px;
 box-shadow: 0px 5px 10px 2px rgb(206, 206, 206);
 }
 
@@ -122,5 +127,11 @@ box-shadow: 0px 5px 10px 2px rgb(206, 206, 206);
   object-fit: cover;
   height: 100%;
   width: 100%;
+}
+
+@media all and (max-width: 550px)  {
+  .container {
+      border-radius: 0;
+  }
 }
 </style>>

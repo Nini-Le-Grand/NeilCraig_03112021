@@ -8,9 +8,9 @@
       <router-link :to="'/user/' + user.id">
         <div class="name">{{ user.firstName }} {{ user.lastName }}</div>
       </router-link>
-      <div class="email">
+      <a :href="href" class="email">
         {{ user.email }}
-      </div>
+      </a>
       <div class="position">
         {{ user.position }}
       </div>
@@ -37,6 +37,12 @@ export default {
     user: {
       type: Object,
     },
+  },
+  data() {
+    return {
+      href:`mailto:${this.user.email}`
+    }
+
   },
   methods: {
     hasImage() {
