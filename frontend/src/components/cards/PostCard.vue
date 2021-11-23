@@ -22,7 +22,7 @@
       {{ post.message }}
     </div>
     <div v-if="post.imageUrl !== ''" class="picture">
-      <img :src="post.imageUrl" />
+      <img :src="post.imageUrl" alt="Photo du post"/>
     </div>
 
     <div class="reactions">

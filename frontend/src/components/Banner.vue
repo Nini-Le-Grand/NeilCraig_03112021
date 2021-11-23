@@ -1,6 +1,6 @@
 <template>
   <div class="banners">
-    <img src="@/assets/icon-left-font-monochrome-white-cropped.png" alt="">
+    <img src="@/assets/icon-left-font-monochrome-white-cropped.png" alt="Logo">
   </div>
 </template>
 

@@ -22,7 +22,7 @@
         <div class="profile">
           <div class="info">
             <div class="picture">
-              <img v-if="hasImage()" class="picture-img" :src="renderImg()" />
+              <img v-if="hasImage()" class="picture-img" :src="renderImg()" alt="Photo de profil"/>
               <i v-else class="far fa-image" ></i>
             </div>
             <div class="name">{{ $store.state.firstName }}</div>

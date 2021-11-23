@@ -4,7 +4,7 @@
     class="containerrr"
   >
     <div class="picture">
-      <img :src="partner.imageUrl" class="picture-img" />
+      <img :src="partner.imageUrl" alt="Photo de profil" class="picture-img" />
     </div>
     <div class="name">
       {{ partner.lastName }}

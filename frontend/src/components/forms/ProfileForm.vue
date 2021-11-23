@@ -41,7 +41,7 @@
         </div>
         
         <div class="image">
-          <img :src="encodedUrl" />
+          <img :src="encodedUrl" alt="Aperçu de l'image"/>
         </div>
         <div class="centerImg"></div>
       </div>

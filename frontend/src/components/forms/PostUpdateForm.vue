@@ -17,7 +17,7 @@
 
       <label for="file">Charger une image</label>
       <div class="image">
-        <img :src="encodedUrl" />
+        <img :src="encodedUrl" alt="Aperçu de l'image"/>
       </div>
       <input type="file" ref="file" @change="previewImage()" />
 

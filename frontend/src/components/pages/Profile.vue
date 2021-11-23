@@ -3,7 +3,7 @@
     <h2>Profil</h2>
     <div class="info">
       <div class="picture">
-        <img v-if="hasImage()" class="picture-img" :src="renderImg()" />
+        <img v-if="hasImage()" class="picture-img" :src="renderImg()" alt="Photo de profil"/>
         <i v-else class="far fa-image"></i>
       </div>
       <div class="name">{{ userData.firstName }} {{ userData.lastName }}</div>

@@ -4,7 +4,7 @@
     <router-link v-else :to="'/user/' + userId">
       <div class="user_pres">
         <div class="userImg">
-          <img :src="user.imageUrl" class="img" />
+          <img :src="user.imageUrl" alt="Photo de profil" class="img" />
         </div>
         <div class="userName">{{ user.lastName }} {{ user.firstName }}</div>
       </div>
