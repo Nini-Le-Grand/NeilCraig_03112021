@@ -40,6 +40,9 @@ export default {
 </script>
 
 <style scoped>
+span {
+  font-size: 18px;
+}
 button {
   display: flex;
   justify-content: center;
@@ -67,18 +70,19 @@ a {
   justify-content: space-between;
   text-decoration: none;
   color: black;
+  font-size: 18px;
 }
 
 i {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .label {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   margin-right: 30px;
   border-radius: 9999px;
   background-color: rgb(189, 189, 189);
@@ -90,14 +94,14 @@ i {
 
 ul {
   list-style-type: none;
-  margin: 10px 10px 0px 0px;
+  margin: 0px 0px 0px 0px;
   width: 300px;
   padding: 10px;
   background-color: white;
   box-shadow: 0px 5px 10px 1px rgb(184, 184, 184);
-  border-radius: 15px;
+  border-radius: 5px;
   position: absolute;
-  top: 80px;
+  top: 75px;
   right: 0;
   z-index: 2;
 }

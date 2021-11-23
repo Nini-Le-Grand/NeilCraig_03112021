@@ -29,13 +29,10 @@ export default {
   margin: 0;
   padding: 0;
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  font-size: 18px;
   text-decoration: none;
 }
 .navbar {
   position: sticky;
   top: 0;
-  display: flex;
-  flex-direction: column;
 }
 </style>
