@@ -55,11 +55,12 @@ Afin de pouvoir utiliser ce projet, veuillez suivre ces étapes :
     - createdAt (datetime)
   }
   
-3) Télécharger le dossier Github
+3) Télécharger le répertoire à partir de Github
 4) Dans le dossier backend, compléter le fichier .envconfig puis le renommer .env
-5) Dans le terminal, se placer dans le dossier backend et lancer l'installation des packages avec la commande npm install
-6) Dans le terminal, se placer dans le dossier frontend et lancer l'installation des packages avec la commande npm install
-7) Dans le terminal, se placer dans le dossier backend et lancer le serveur avec la commande nodemon server
-6) Dans le terminal, se placer dans le dossier frontend et lancer le serveur avec la commande npm run serve
+5) Dans le dossier backend, créer un dossier images contenant deux sous dossier : posts, users
+6) Dans le terminal, se placer dans le dossier backend et lancer l'installation des packages avec la commande npm install
+7) Dans le terminal, se placer dans le dossier frontend et lancer l'installation des packages avec la commande npm install
+8) Dans le terminal, se placer dans le dossier backend et lancer le serveur avec la commande nodemon server
+9) Dans le terminal, se placer dans le dossier frontend et lancer le serveur avec la commande npm run serve
 
 L'application est prête à l'emploi ! Rendez-vous à l'addresse http://localhost:8080
