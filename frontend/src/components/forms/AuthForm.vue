@@ -3,8 +3,10 @@
     <h2><i class="fas fa-lock label"></i>Modifier le mot de passe</h2>
     <form @submit.prevent="sendReq()">
       <label for="oldPassword">Mot de passe actuel</label>
-      <div class="textInput">
-        <i class="fas fa-backspace textLabel"></i>
+      <div class="input">
+        <div class="input-logo">
+          <i class="fas fa-backspace textLabel"></i>
+        </div>
         <input
           type="text"
           id="oldPassword"
@@ -14,8 +16,10 @@
       </div>
 
       <label for="newPassword">Nouveau mot de passe</label>
-      <div class="textInput">
+      <div class="input">
+        <div class="input-logo">
         <i class="fas fa-key textLabel"></i>
+        </div>
         <input
           type="text"
           id="newPassword"
@@ -24,7 +28,7 @@
         />
       </div>
 
-      <button>Modifier le mot de passe</button>
+      <button :disabled="disabled">Modifier le mot de passe</button>
     </form>
   </div>
 </template>
@@ -37,7 +41,15 @@ export default {
     return {
       oldPassword: "",
       newPassword: "",
+      disabled: true,
     };
+  },
+  updated() {
+    if ((this.oldPassword != "") & (this.newPassword != "")) {
+      this.disabled = false;
+    } else {
+      this.disabled = true;
+    }
   },
   methods: {
     sendReq() {
@@ -49,8 +61,8 @@ export default {
         http
           .put("/auth/updatePassword", request)
           .then((data) => {
-            alert(data.data.message)
-            this.$router.push("Home")
+            alert(data.data.message);
+            this.$router.push("Home");
           })
           .catch((err) => {
             alert(err.response.data.error);
@@ -62,51 +74,58 @@ export default {
 </script>
 
 <style scoped>
-.textLabel {
-  margin-right: 15px;
-}
-.textInput {
-  border: 2px solid rgb(197, 197, 197);
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
-  font-size: 30px;
-  color: rgb(197, 197, 197);
-  margin-bottom: 25px;
-}
-
-input[type="text"] {
+input {
+  font-size: 18px;
+  border: 0px solid white;
   width: 100%;
-  border: none;
-  font-size: 20px;
 }
 
-input[type="text"]:focus {
+input::placeholder {
+  color: rgb(211, 211, 211);
+}
+
+input:focus {
   outline: none;
 }
 
-.textInput:hover {
-  box-shadow: 0px 0px 2px 4px rgba(184, 184, 184, 0.151);
+input:focus::placeholder {
+  color: white;
 }
 
-.textInput:focus-within {
-  border: 2px solid rgb(71, 104, 255);
+.input {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 8px;
+  border: 2px solid rgb(196, 196, 196);
+  color: rgb(184, 184, 184);
+  background-color: white;
+}
+
+.input:hover {
+  box-shadow: 0px 0px 2px 4px rgba(184, 184, 184, 0.151);
+}
+.input:focus-within {
+  border: 2px solid rgb(5, 113, 255);
   color: black;
 }
 
+.input-logo {
+  margin-right: 10px;
+}
+
 .label {
-  margin-right: 20px;
-  font-size: 50px;
+  font-size: 30px;
+  margin-right: 5px;
 }
 
 h2 {
   text-align: center;
-  height: 60px;
-  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 3px;
 }
 
 .form-container {
@@ -122,14 +141,28 @@ form {
 }
 
 label {
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
 button {
-  margin-bottom: 20px;
-  border-radius: 9999px;
-  padding: 10px;
-  font-size: 20px;
+  padding: 10px 0px;
+  color: rgb(5, 113, 255);
+  background-color: white;
+  border: 2px solid rgb(5, 113, 255);
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  box-shadow: 0px 0px 5px 1px rgb(5, 113, 255);
+}
+
+button:disabled {
+  color: rgb(192, 192, 192);
+  cursor: unset;
+  border: 2px solid rgb(192, 192, 192);
+  background-color: rgb(238, 238, 238);
+  box-shadow: 0px 0px 0px 0px white;
 }
 </style>

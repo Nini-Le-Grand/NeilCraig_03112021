@@ -5,7 +5,7 @@
       <div class="forms">
         <div class="authForm">
           <AuthForm />
-          <DeleteUserCard class="deleteAccount" />
+          <DeleteUserCard class="deleteAccount" v-if="!isAdmin"/>
         </div>
         <div class="profileForm">
           <ProfileForm />
@@ -24,13 +24,28 @@ import DeleteUserCard from "../components/cards/DeleteUserCard.vue";
 export default {
   name: "updateProfile",
   components: { Navbar, ProfileForm, AuthForm, DeleteUserCard },
+  data() {
+    return {
+      isAdmin: this.$store.state.isAdmin
+    }
+  }
 };
 </script>
 
 <style scoped>
+@media all and (max-width: 953px) {
+  .authForm {
+  flex: 4;
+  margin-top: 20px;
+}
+.forms {
+  display: flex;
+  flex-direction: column-reverse;
+}
+}
 .container {
   background-color: rgba(122, 175, 255, 0.473);
-  padding: 40px 90px;
+  padding: 20px 90px;
 }
 .forms {
   display: flex;

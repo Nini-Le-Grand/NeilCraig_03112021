@@ -37,19 +37,25 @@ export default {
 
 <style scoped>
 button {
-  margin-bottom: 20px;
-  border-radius: 9999px;
-  padding: 10px;
-  font-size: 20px;
+  padding: 10px 0px;
+  color: rgb(5, 113, 255);
+  background-color: white;
+  border: 2px solid rgb(5, 113, 255);
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
   width: 100%;
 }
+
+button:hover {
+  box-shadow: 0px 0px 5px 1px rgb(5, 113, 255);
+}
 .logo {
-  font-size: 100px;
+  font-size: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 20px 0px;
   color: red;
 }
 .form-container {
@@ -58,17 +64,16 @@ button {
   border-radius: 15px;
   box-shadow: 0px 5px 10px 2px rgb(190, 190, 190);
 }
+.label {
+  font-size: 30px;
+  margin-right: 5px;
+}
+
 h2 {
   text-align: center;
-  margin-bottom: 20px;
-  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.label {
-  margin-right: 20px;
-  font-size: 50px;
+  margin-bottom: 3px;
 }
 </style>

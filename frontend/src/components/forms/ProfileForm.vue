@@ -1,49 +1,201 @@
 <template>
   <div class="form-container">
-    <h2><i class="fas fa-user-cog label"></i>Modifier le profil</h2>
+    <h2><i class="fas fa-user-cog h2label"></i>Modifier le profil</h2>
     <form @submit.prevent="send()" enctype="multipart/form-data">
       <label for="lastName">Nom</label>
-      <div class="textInput">
-        <i class="fas fa-user-edit textLabel"></i>
+      <div class="input">
+        <div class="input-logo">
+          <i class="fas fa-user-edit "></i>
+        </div>
         <input type="text" name="lastName" v-model="lastName" />
       </div>
 
       <label for="firstName">Prénom</label>
-      <div class="textInput">
-        <i class="fas fa-user-edit textLabel"></i>
-        <input
-          type="text"
-          name="firstName"
-          v-model="firstName"
-        />
+      <div class="input">
+        <div class="input-logo">
+          <i class="fas fa-user-edit "></i>
+        </div>
+        <input type="text" name="firstName" v-model="firstName" />
       </div>
 
       <label for="position">Poste occupé</label>
-      <div class="textInput">
-        <i class="fas fa-user-tie textLabel"></i>
+      <div class="input">
+        <div class="input-logo">
+          <i class="fas fa-user-tie "></i>
+        </div>
         <input type="text" name="position" v-model="position" />
       </div>
 
       <label for="description">Description</label>
-      <div class="textInput">
-        <i class="fas fa-user-tag textLabel"></i>
-        <input
-          type="text"
-          name="description"
-          v-model="description"
-        />
+      <div class="input">
+        <div class="input-logo">
+          <i class="fas fa-user-tag "></i>
+        </div>
+        <input type="text" name="description" v-model="description" />
       </div>
 
-      <label for="file">Upload Image</label>
-      <div class="image">
-        <img :src="encodedUrl" />
+      <div class="uploadImg">
+        <div class="label">
+          <label for="file">Upload Image</label>
+        <input type="file" ref="file" @change="previewImage()" />
+        </div>
+        
+        <div class="image">
+          <img :src="encodedUrl" />
+        </div>
+        <div class="centerImg"></div>
       </div>
-      <input type="file" ref="file" @change="previewImage()" />
 
-      <button>Modifier le profil</button>
+      <button :disabled="disabled">Modifier le profil</button>
     </form>
   </div>
 </template>
+
+
+
+<style scoped>
+.h2label {
+  font-size: 30px;
+  margin-right: 15px;
+}
+
+.centerImg {
+  width: 130px;
+}
+.uploadImg {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  font-size: 18px;
+  border: 0px solid white;
+  width: 100%;
+}
+
+input::placeholder {
+  color: rgb(211, 211, 211);
+}
+
+input:focus {
+  outline: none;
+}
+
+input:focus::placeholder {
+  color: white;
+}
+
+.input {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 8px;
+  border: 2px solid rgb(196, 196, 196);
+  color: rgb(184, 184, 184);
+  background-color: white;
+}
+
+.input:hover {
+  box-shadow: 0px 0px 2px 4px rgba(184, 184, 184, 0.151);
+}
+.input:focus-within {
+  border: 2px solid rgb(5, 113, 255);
+  color: black;
+}
+
+.input-logo {
+  margin-right: 10px;
+}
+
+input[type="file"] {
+  color: black;
+  cursor: pointer;
+  font-size: 15px;
+  width: 130px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  margin: 0px 30px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0px 5px 10px 2px rgb(190, 190, 190);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 3px;
+}
+
+img {
+  height: 100%;
+}
+
+.image {
+  height: 180px;
+  width: 150px;
+  border: 2px solid rgb(180, 180, 180);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+  justify-self: center;
+
+}
+
+button {
+  padding: 10px 0px;
+  color: rgb(5, 113, 255);
+  background-color: white;
+  border: 2px solid rgb(5, 113, 255);
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  box-shadow: 0px 0px 5px 1px rgb(5, 113, 255);
+}
+
+button:disabled {
+  color: rgb(192, 192, 192);
+  cursor: unset;
+  border: 2px solid rgb(192, 192, 192);
+  background-color: rgb(238, 238, 238);
+  box-shadow: 0px 0px 0px 0px white;
+}
+
+@media all and (max-width: 953px) {
+  .form-container {
+  margin: 0px 0px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0px 5px 10px 2px rgb(190, 190, 190);
+}
+}
+</style>
 
 <script>
 import http from "../../http";
@@ -61,7 +213,15 @@ export default {
       encodedUrl: this.$store.state.imageUrl,
       file: "",
       error: "",
+      disabled: true,
     };
+  },
+  updated() {
+    if ((this.firstName != "") & (this.lastName != "") & (this.position != "") & (this.description != "")) {
+      this.disabled = false;
+    } else {
+      this.disabled = true;
+    }
   },
   methods: {
     ...mapMutations(["refreshPicture", "refreshProfile"]),
@@ -100,100 +260,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.textLabel {
-  margin-right: 15px;
-}
-.textInput {
-  border: 2px solid rgb(197, 197, 197);
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
-  font-size: 30px;
-  color: rgb(197, 197, 197);
-  margin-bottom: 25px;
-}
-
-input[type="text"] {
-  width: 100%;
-  border: none;
-  font-size: 20px;
-}
-
-input[type="text"]:focus {
-  outline: none;
-}
-
-input[type="file"] {
-  color: black;
-  cursor: pointer;
-  font-size: 20px;
-  margin-bottom: 30px;
-}
-
-.textInput:hover {
-  box-shadow: 0px 0px 2px 4px rgba(184, 184, 184, 0.151);
-}
-
-.textInput:focus-within {
-  border: 2px solid rgb(71, 104, 255);
-  color: black;
-}
-
-.label {
-  margin-right: 20px;
-  font-size: 50px;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.form-container {
-  margin: 0px 30px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0px 5px 10px 2px rgb(190, 190, 190);
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  margin-bottom: 5px;
-}
-
-img {
-  height: 100%;
-}
-
-.image {
-  height: 280px;
-  width: 250px;
-  border: 2px solid rgb(180, 180, 180);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  margin: 20px auto;
-  border-radius: 10px;
-}
-
-button {
-  margin-bottom: 20px;
-  border-radius: 9999px;
-  padding: 10px;
-  font-size: 20px;
-  cursor: pointer;
-}
-</style>

@@ -71,6 +71,7 @@ export default {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("userId", response.data.userId);
           this.initUser(response.data);
+          console.log(this.$store.state);
           this.$router.push("Home");
         })
         .catch((error) => {
