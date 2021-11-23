@@ -18,8 +18,10 @@
         {{ user.description }}
       </div>
     </div>
-
-    <Followbtn :partnerId="user.id" />
+    <div>
+      <Followbtn :partnerId="user.id" />
+    </div>
+    
   </div>
 </template>
 
@@ -55,8 +57,7 @@ export default {
 <style scoped>
 .description {
   font-style: italic;
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 16px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -65,6 +66,7 @@ export default {
 }
 .position {
   margin: 10px 0px;
+  font-size: 18px;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -74,11 +76,22 @@ export default {
 .name {
   font-weight: bold;
   text-align: center;
-  min-height: 45px;
+  margin: 2px;
+  font-size: 22px;
+ display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .email {
-  color: blue;
+  color: rgb(5, 113, 255);;
   text-decoration: underline;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .info {
@@ -88,13 +101,13 @@ export default {
   align-items: center;
 }
 .containerr {
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
   background-color: white;
   width: 200px;
+  
 }
 
 .picture {
@@ -102,8 +115,6 @@ export default {
   border-radius: 9999px;
   height: 150px;
   width: 150px;
-  margin-left: 3px;
-  margin-right: 15px;
   display: flex;
   justify-content: center;
   align-items: center;

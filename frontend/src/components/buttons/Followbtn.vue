@@ -77,10 +77,13 @@ export default {
   border-top: 2px solid grey;
   padding-top: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
-/* The switch - the box around the slider */
+
+.label {
+  font-size: 20px;
+}
 .switch {
   position: relative;
   display: inline-block;
@@ -88,14 +91,12 @@ export default {
   height: 34px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -121,11 +122,11 @@ export default {
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: rgb(5, 113, 255);;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px rgb(5, 113, 255);;
 }
 
 input:checked + .slider:before {
@@ -134,7 +135,6 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }
