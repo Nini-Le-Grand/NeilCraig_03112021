@@ -1,0 +1,5 @@
+HOST=localhost
+USER=  --nom d'utilisateur 
+PASSWORD=  --mot de passe utilisateur
+DATABASE=  --Le nom de la base de donnée créée sur mySQL
+SECRET_TOKEN=  --Choisissez le token que vous voulez !
