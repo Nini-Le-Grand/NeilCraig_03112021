@@ -46,19 +46,40 @@ export default {
 <style scoped>
 .container {
   padding: 20px;
-  background-color: rgb(94, 158, 255);
+  background-color: rgb(184, 223, 255);
   display: flex;
   justify-content: space-around;
 }
 
 .formbox {
-  width: 30%;
+  width: 35%;
 }
 
 .feedbox {
   width: 60%;
   display: flex;
   flex-direction: column;
-  border-radius: 15px;
+}
+
+@media all and (max-width: 900px) {
+  .container {
+  padding: 0px;
+  background-color: rgb(184, 223, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.formbox {
+  width: 100%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.feedbox {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
 }
 </style>

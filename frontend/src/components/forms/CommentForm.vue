@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="send()" class="container">
-    <label for="comment">Commenter</label>
+    <label for="comment"><span class="big">Commenter</span><span class="small"><i class="far fa-comment-dots"></i></span></label>
 
     <input type="text" class="input" v-model="message" />
     <button>Envoyer</button>
@@ -41,6 +41,12 @@ export default {
 </script>
 
 <style scoped>
+.big {
+    display: unset;
+  }
+  .small {
+    display: none;
+  }
 .container {
   border: 2px solid rgb(19, 113, 255);
   background-color: rgb(19, 113, 255);
@@ -73,5 +79,14 @@ button {
   background-color: rgb(19, 113, 255);
   font-weight: bold;
   color: white;
+}
+
+@media all and (max-width: 470px) {
+  .big {
+    display: none;
+  }
+  .small {
+    display: unset;
+  }
 }
 </style>

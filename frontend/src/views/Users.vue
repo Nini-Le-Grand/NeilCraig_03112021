@@ -23,7 +23,7 @@
 }
 
 .show_container {
-  background-color: rgb(196, 231, 255);
+  background-color: rgb(184, 223, 255);
 }
 
 .cardbox {

@@ -1,26 +1,40 @@
 <template>
   <div class="form-container">
-    <h2><i class="fas fa-user-cog label"></i>Partagez quelque chose !</h2>
+    <h2><i class="fas fa-user-cog h2label"></i>Partagez quelque chose !</h2>
     <form @submit.prevent="sendReq()" enctype="multipart/form-data">
       <label for="tilte">Titre</label>
-      <div class="textInput">
-        <i class="fas fa-user-edit textLabel"></i>
+
+      <div class="input">
+        <div class="input-logo">
+          <i class="fas fa-user-edit textLabel"></i>
+        </div>
+        
         <input type="text" name="title" v-model="title" />
       </div>
 
       <label for="message">Message</label>
-      <div class="textInput">
-        <i class="fas fa-user-edit textLabel"></i>
+      <div class="input">
+        <div class="input-logo">
+          <i class="fas fa-user-edit textLabel"></i>
+        </div>
+        
         <input type="text" name="message" v-model="message" />
       </div>
 
-      <label for="file">Charger une image</label>
-      <div class="image">
-        <img :src="encodedUrl" />
-      </div>
-      <input type="file" ref="file" @change="previewImage()" />
 
-      <button>Partager !</button>
+      <div class="uploadImg">
+        <div class="label">
+          <label for="file">Upload Image</label>
+        <input type="file" ref="file" @change="previewImage()" />
+        </div>
+        
+        <div class="image">
+          <img :src="encodedUrl" />
+        </div>
+        <div class="centerImg"></div>
+      </div>
+
+      <button :disabled="disabled">Partager !</button>
     </form>
   </div>
 </template>
@@ -37,6 +51,14 @@ export default {
       encodedUrl: "",
       file: "",
       error: "",
+      disabled: true,
+    }
+  },
+  updated() {
+    if ((this.title != "") & (this.message != "")) {
+      this.disabled = false;
+    } else {
+      this.disabled = true;
     }
   },
   methods: {
@@ -74,55 +96,78 @@ export default {
 </script>
 
 <style scoped>
-.textLabel {
+.h2label {
+  font-size: 30px;
   margin-right: 15px;
+  margin-bottom: 10px;
 }
-.textInput {
-  border: 2px solid rgb(197, 197, 197);
-  border-radius: 9999px;
+
+.centerImg {
+  width: 0px;
+}
+.uploadImg {
   display: flex;
   align-items: center;
-  padding: 5px 10px;
-  font-size: 30px;
-  color: rgb(197, 197, 197);
-  margin-bottom: 15px;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-input[type="text"] {
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  font-size: 18px;
+  border: 0px solid white;
   width: 100%;
-  border: none;
-  font-size: 20px;
 }
 
-input[type="text"]:focus {
+input::placeholder {
+  color: rgb(211, 211, 211);
+}
+
+input:focus {
   outline: none;
+}
+
+input:focus::placeholder {
+  color: white;
+}
+
+.input {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 8px;
+  border: 2px solid rgb(196, 196, 196);
+  color: rgb(184, 184, 184);
+  background-color: white;
+}
+
+.input:hover {
+  box-shadow: 0px 0px 2px 4px rgba(184, 184, 184, 0.151);
+}
+.input:focus-within {
+  border: 2px solid rgb(5, 113, 255);
+  color: black;
+}
+
+.input-logo {
+  margin-right: 10px;
 }
 
 input[type="file"] {
   color: black;
   cursor: pointer;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-.textInput:hover {
-  box-shadow: 0px 0px 2px 4px rgba(184, 184, 184, 0.151);
-}
-
-.textInput:focus-within {
-  border: 2px solid rgb(71, 104, 255);
-  color: black;
-}
-
-.label {
-  margin-right: 20px;
-  font-size: 50px;
+  font-size: 15px;
+  width: 130px;
+  margin-bottom: 30px;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 10px;
-  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -133,8 +178,6 @@ h2 {
   background-color: white;
   border-radius: 15px;
   box-shadow: 0px 5px 10px 2px rgb(190, 190, 190);
-  position: sticky;
-  top: 100px;
 }
 
 form {
@@ -158,14 +201,52 @@ img {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  margin: 5px auto;
   border-radius: 10px;
+  justify-self: center;
+
 }
 
 button {
-  border-radius: 9999px;
-  padding: 10px;
-  font-size: 20px;
+  padding: 10px 0px;
+  color: rgb(5, 113, 255);
+  background-color: white;
+  border: 2px solid rgb(5, 113, 255);
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  box-shadow: 0px 0px 5px 1px rgb(5, 113, 255);
+}
+
+button:disabled {
+  color: rgb(192, 192, 192);
+  cursor: unset;
+  border: 2px solid rgb(192, 192, 192);
+  background-color: rgb(238, 238, 238);
+  box-shadow: 0px 0px 0px 0px white;
+}
+
+@media all and (max-width: 900px) {
+  .form-container {
+  margin: 0px 0px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 0px;
+  box-shadow: 0px 5px 10px 2px rgb(190, 190, 190);
+}
+.image {
+  height: 180px;
+  width: 250px;
+  border: 2px solid rgb(180, 180, 180);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+  justify-self: center;
+
+}
 }
 </style>

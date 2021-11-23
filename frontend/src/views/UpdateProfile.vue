@@ -44,7 +44,7 @@ export default {
 }
 }
 .container {
-  background-color: rgba(122, 175, 255, 0.473);
+  background-color: rgb(184, 223, 255);
   padding: 20px 90px;
 }
 .forms {
