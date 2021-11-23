@@ -17,7 +17,6 @@ exports.like = (req, res) => {
 };
 
 exports.getLikes = (req, res) => {
-    console.log(req.params.commentId);
   LikeComment.getForComment(req.params.commentId)
     .then((data) => {
       res.status(200).json(data);

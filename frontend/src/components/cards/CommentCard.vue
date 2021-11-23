@@ -8,7 +8,7 @@
             <div class="user">
               <CommentUser :userId_props="comment.userId" />
               <DeleteComment
-                v-if="isAuthor"
+                v-if="isAuthor()"
                 :commentId_props="comment.id"
                 @deletePost="deleteMsg"
               />
@@ -70,13 +70,13 @@ export default {
       userId: this.userId_props,
       comment: this.comment_props,
       deleted: false,
-      isAuthor: false,
       likes: [],
       liked: false,
       likedId: 0,
       likesNumber: 0,
       hasFetched: false,
-      userLiked: false
+      userLiked: false,
+      isAdmin: this.$store.state.isAdmin,
     };
   },
   beforeMount() {
@@ -89,6 +89,13 @@ export default {
     this.getCommentLikes();
   },
   methods: {
+    isAuthor() {
+      if(this.comment.userId == this.$store.state.userId || this.isAdmin) {
+        return true
+      } else {
+        return false
+      }
+    },
     deleteMsg(payload) {
       this.deleted = payload.delete;
       const commentCountChange = -1;
